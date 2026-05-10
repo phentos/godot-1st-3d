@@ -2,10 +2,10 @@ extends CharacterBody3D
 
 signal squashed
 
-@export var min_speed = 10
+@export var min_speed = 8
 @export var max_speed = 18
 
-func _physics_process(delta):
+func _physics_process(_delta):
 	move_and_slide()
 	
 func initialize(start_position, player_position):

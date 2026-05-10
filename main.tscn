@@ -44,7 +44,6 @@ transform = Transform3D(1, 0, 0, 0, -4.371139e-08, 1, 0, -1, -4.371139e-08, 0, 9
 shadow_enabled = true
 
 [node name="Player" parent="." unique_id=1098764046 instance=ExtResource("1_ig7tw")]
-collision_mask = 6
 
 [node name="CameraPivot" type="Marker3D" parent="." unique_id=2102943694]
 transform = Transform3D(1, 0, 0, 0, 0.70710677, 0.70710677, 0, -0.70710677, 0.70710677, 0, 0, 0)
@@ -76,10 +75,11 @@ mesh = SubResource("CylinderMesh_0xm2m")
 curve = SubResource("Curve3D_h2yge")
 
 [node name="SpawnLocation" type="PathFollow3D" parent="SpawnPath" unique_id=1799526730]
-transform = Transform3D(0.002688003, 0, -0.99999624, 0, 1, 0, 0.99999624, 0, 0.002688003, -13.404416, 0, -14.455486)
+transform = Transform3D(0.0026880025, 0, -0.99999607, 0, 1, 0, 0.99999607, 0, 0.0026880025, -13.404416, 0, -14.455486)
 
 [node name="MobTimer" type="Timer" parent="." unique_id=2002213541]
 wait_time = 0.5
 autostart = true
 
+[connection signal="hit" from="Player" to="." method="_on_player_hit"]
 [connection signal="timeout" from="MobTimer" to="." method="_on_mob_timer_timeout"]
