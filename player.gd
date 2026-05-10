@@ -2,10 +2,10 @@ extends CharacterBody3D
 
 signal hit
 
-@export var speed = 14
+@export var speed = 18
 @export var fall_acceleration = 75
-@export var jump_impulse = 20
-@export var bounce_impulse = 30
+@export var jump_impulse = 30
+@export var bounce_impulse = 20
 
 # "3d vector combining speed with direction"
 var target_velocity = Vector3.ZERO
@@ -31,12 +31,12 @@ func _physics_process(delta):
 	target_velocity.z = direction.z * speed
 	
 	if is_on_floor():
-		bonk_bonus = 1
+		bonk_bonus -= 1
 		if Input.is_action_just_pressed("jump"):
 			target_velocity.y = jump_impulse
 	else:
 		target_velocity.y = target_velocity.y - ((fall_acceleration * delta) / bonk_bonus)
-	
+	bonk_bonus = clamp(bonk_bonus, 1, 5)
 	velocity = target_velocity
 	
 	move_and_slide()
@@ -52,7 +52,7 @@ func process_collisions():
 			if mob.is_in_group("mob") and Vector3.UP.dot(collision.get_normal()) > 0.1:
 				mob.squash()
 				bonk_bonus += 1
-				target_velocity.y = bounce_impulse
+				target_velocity.y = bounce_impulse * bonk_bonus
 				break
 
 func die():
