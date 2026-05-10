@@ -7,7 +7,9 @@
 radius = 0.8857422
 height = 2.8243408
 
-[node name="Mob" type="CharacterBody3D" unique_id=1270131139]
+[node name="Mob" type="CharacterBody3D" unique_id=1270131139 groups=["mob"]]
+collision_layer = 2
+collision_mask = 2
 script = ExtResource("1_r6b5h")
 
 [node name="Pivot" type="Node3D" parent="." unique_id=1923563835]
