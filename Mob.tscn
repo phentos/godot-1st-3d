@@ -7,6 +7,40 @@
 radius = 0.8857422
 height = 2.8243408
 
+[sub_resource type="Animation" id="Animation_nokgg"]
+resource_name = "float"
+length = 1.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("Pivot/Character:position")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0.3, 0.7, 1.2),
+"transitions": PackedFloat32Array(0.39229217, 2.0705302, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0, 0.65, 0), Vector3(0, 0.35, 0)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath("Pivot/Character:rotation")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0.1, 0.5, 1.2),
+"transitions": PackedFloat32Array(0.39229217, 0.43527538, 1),
+"update": 0,
+"values": [Vector3(0, 0, 0), Vector3(0.13962634, 0, 0), Vector3(-0.15707964, 0, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_ubaqv"]
+_data = {
+&"float": SubResource("Animation_nokgg")
+}
+
 [node name="Mob" type="CharacterBody3D" unique_id=1270131139 groups=["mob"]]
 collision_layer = 2
 collision_mask = 0
@@ -15,6 +49,7 @@ script = ExtResource("1_r6b5h")
 [node name="Pivot" type="Node3D" parent="." unique_id=1923563835]
 
 [node name="Character" parent="Pivot" unique_id=531235008 instance=ExtResource("2_6frnq")]
+transform = Transform3D(1, 0, 0, 0, 0.98768836, 0.15643448, 0, -0.15643448, 0.98768836, 0, 0.35, 0)
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="." unique_id=1156118996]
 transform = Transform3D(0.99872005, -3.1281263e-05, 0.05057784, 0.050577838, 0.0012360974, -0.99871933, -3.1279396e-05, 0.9999992, 0.0012360974, -0.024901403, 0.5515753, 0.20239758)
@@ -23,5 +58,9 @@ shape = SubResource("CapsuleShape3D_gguu4")
 [node name="VisibleOnScreenNotifier3D" type="VisibleOnScreenNotifier3D" parent="." unique_id=1728632518]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 0.27773416)
 aabb = AABB(-1.2253946, -1, -1.7675995, 2.4507892, 2, 3.535199)
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1315515852]
+libraries/ = SubResource("AnimationLibrary_ubaqv")
+autoplay = &"float"
 
 [connection signal="screen_exited" from="VisibleOnScreenNotifier3D" to="." method="_on_visible_on_screen_notifier_3d_screen_exited"]

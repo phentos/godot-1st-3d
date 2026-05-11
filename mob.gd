@@ -15,6 +15,8 @@ func initialize(start_position, player_position):
 	var speed = randi_range(min_speed, max_speed)
 	velocity = (Vector3.FORWARD * speed).rotated(Vector3.UP, rotation.y)
 	
+	$AnimationPlayer.speed_scale = speed / min_speed
+	
 func _on_visible_on_screen_notifier_3d_screen_exited():
 	queue_free()
 

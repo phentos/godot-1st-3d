@@ -26,6 +26,9 @@ func _physics_process(delta):
 	if direction != Vector3.ZERO:
 		direction = direction.normalized()
 		$Pivot.basis = Basis.looking_at(direction)
+		$AnimationPlayer.speed_scale = 6
+	else:
+		$AnimationPlayer.speed_scale = 1
 	
 	target_velocity.x = direction.x * speed
 	target_velocity.z = direction.z * speed
@@ -36,12 +39,15 @@ func _physics_process(delta):
 			target_velocity.y = jump_impulse
 	else:
 		target_velocity.y = target_velocity.y - ((fall_acceleration * delta) / bonk_bonus)
+	
 	bonk_bonus = clamp(bonk_bonus, 1, 5)
 	velocity = target_velocity
 	
 	move_and_slide()
 	
 	process_collisions()
+	
+	$Pivot.rotation.x = PI / 2 * velocity.y / (jump_impulse * bonk_bonus)
 	
 func process_collisions():
 	for index in range(get_slide_collision_count()):
